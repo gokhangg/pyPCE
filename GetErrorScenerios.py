@@ -52,7 +52,7 @@ def GetErrorScenerios(pceSettings):
     cubatures = GetCubature(quadratures, pceSettings.gridLevel, pceSettings.gridType)
     cubatures.quadratures = quadratures
     cubatures.scenarios, scenarioIndex = Unique(np.concatenate(cubatures.nodes.transpose()[:, 0]))
-    cubatures.scenariosScaled = cubatures.scenarios.dot(np.diag(pceSettings.deviations))
+    cubatures.scenariosScaled = cubatures.scenarios.dot(np.diag(pceSettings.sDeviations))
     cubatures.totalWeights = AccumArray(scenarioIndex, np.concatenate(cubatures.weights[0, :]))
     nodeSize = ApplyFuncToCellMatrix(cubatures.nodes, GetSize, axis = 0)
     cubatures.fullIndex = np.array(np.split(scenarioIndex, NodeSizeToSplitSize(nodeSize)), dtype = object)

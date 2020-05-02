@@ -75,3 +75,12 @@ def NodeSizeToSplitSize(nodeSize):
         temp += nodeSize[ind]
         nodeSize[ind] = temp
     return nodeSize[:-1]
+
+
+def StringUnique(stringVector):
+    stringVector = np.array(stringVector)
+    uStringVector = np.unique(stringVector)
+    iUStringVector = np.ones(stringVector.shape[0], dtype = "uint32")
+    for ind in range(uStringVector.shape[0]):
+        iUStringVector[stringVector == uStringVector[ind]] = ind
+    return uStringVector, iUStringVector

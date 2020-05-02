@@ -29,7 +29,8 @@ def CreateNorm(basis, polTypes):
             retVal[ind1] = retVal[ind1] * NormKernel(polType, base[ind0])
     return retVal
 
-def CreateBasisPC(polOrder, polTypes, gridLevel, trim):
+def CreateBasisPC(pce, pceSettings):
+    polOrder, polTypes, gridLevel, trim = pceSettings.polOrder, pce.polTypes, pceSettings.gridLevel, pceSettings.trim
     basis = CreateSparseMultiIndex(len(polTypes), polOrder)
     if trim:
         nDim = basis.shape[1]
