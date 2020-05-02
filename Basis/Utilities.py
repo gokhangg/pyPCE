@@ -46,9 +46,23 @@ def Unique(n):
 
 def Sub2Ind(sz, row, col):
     sz, row, col = np.array(sz), np.array(row), np.array(col)
-    if not row.shape == col.shape:
+    if not row.shape in col.shape:
         assert("Row and column size mismatch.")
     return sz[0] * (col - 1) + row
+
+def Sub2Ind2(sz, *args):
+    sz = np.array(sz)
+    args = list(args)
+    args[0] = np.array(args[0])
+    retVal = args[0]
+    stride = 1
+    for ind in range(1, len(args)):
+        args[ind] = np.array(args[ind])
+        if not args[ind].shape in args[0].shape:
+            assert ("Row and column size mismatch.")
+        stride *= sz[ind - 1]
+        retVal += stride * (args[ind] - 1)
+    return retVal
 
 def AccumArray(subs, val):
     subs, val = np.array(subs) + 1, np.array(val)
@@ -76,7 +90,6 @@ def NodeSizeToSplitSize(nodeSize):
         nodeSize[ind] = temp
     return nodeSize[:-1]
 
-
 def StringUnique(stringVector):
     stringVector = np.array(stringVector)
     uStringVector = np.unique(stringVector)
@@ -84,3 +97,11 @@ def StringUnique(stringVector):
     for ind in range(uStringVector.shape[0]):
         iUStringVector[stringVector == uStringVector[ind]] = ind
     return uStringVector, iUStringVector
+
+def RepMat(inVect, repList):
+    vect = np.copy(inVect)
+    for ind in range(len(repList)):
+        ones_ = np.ones(ind + 1, dtype = "uint32")
+        ones_[0] = repList[ind]
+        vect = np.tile(vect, ones_)
+    return vect.transpose(np.flip(np.arange(len(vect.shape))))

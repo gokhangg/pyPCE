@@ -1,6 +1,6 @@
 import numpy as np
 
-def Hermite(input, polOrders):
+def Laguerre(input, polOrders):
      if not polOrders in np.unique(polOrders):
           assert("Only unique polynomial order vector is supported.")
      nInput = input.shape[0]
@@ -10,8 +10,8 @@ def Hermite(input, polOrders):
      if maxOrder == 0:
           return np.ones([nInput, 1, nScenarios])
      else:
-          tempRecur = np.ones([nInput, maxOrder + 1, nScenarios])
-          tempRecur[:, 1, :] = input[:, 0, :]
-          for ind in range(2, maxOrder + 1):
-               tempRecur[:, ind, :] = input[:, 0, :] * tempRecur[:, ind - 1, :] - (ind - 1) * tempRecur[:, ind - 2, :]
-          return tempRecur[:, polOrders, :]
+         tempRecur = np.ones([nInput, maxOrder + 1, nScenarios])
+         tempRecur[:, 1, :] = 1 - input[:, 0, :]
+         for ind in range(2, maxOrder + 1):
+             tempRecur[:, ind, :] = ((2 * ind - 1 - input[:, 0, :]) * tempRecur[:, ind - 1, :] - (ind - 1) * tempRecur[:, ind - 2, :]) / ind
+         return tempRecur[:, polOrders, :]
