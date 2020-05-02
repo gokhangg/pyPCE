@@ -13,7 +13,7 @@ def NormKernel(polType, index):
     if polType == "hermite":
         return np.math.factorial(index)
     elif polType == "legendre":
-        return  1. / (2 * index+ 1)
+        return 1. / (2 * index+ 1)
     elif polType == "laguerre":
         return 1
     elif polType == "jacobi":
@@ -26,7 +26,7 @@ def CreateNorm(basis, polTypes):
     for ind1, base in enumerate(basis):
         retVal[ind1] = 1
         for ind0, polType in enumerate(polTypes):
-            retVal[ind1] = retVal[ind1]  * NormKernel(polType, base[ind0])
+            retVal[ind1] = retVal[ind1] * NormKernel(polType, base[ind0])
     return retVal
 
 def CreateBasisPC(polOrder, polTypes, gridLevel, trim):
