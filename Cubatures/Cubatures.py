@@ -1,7 +1,10 @@
-from Basis.Utilities import *
 from Quadratures.Quadratures import *
 
 class Cubatures(object):
+    """
+    Cubature class which includes Gaussian quadrature integration nodes, weights, etc. to calculate PCE
+    parameters.
+    """
     def __init__(self, pceSettings):
         quadratures = Quadratures(pceSettings.gridLevel, pceSettings.quadratureType)
         self.__GetCubature(quadratures, pceSettings.gridLevel, pceSettings.gridType)
