@@ -1,4 +1,6 @@
-from Quadratures.Quadratures import *
+from Utilities.Utilities import *
+import Quadratures as Quad
+import numpy as np
 
 class Cubatures(object):
     """
@@ -6,7 +8,7 @@ class Cubatures(object):
     parameters.
     """
     def __init__(self, pceSettings):
-        quadratures = Quadratures(pceSettings.gridLevel, pceSettings.quadratureType)
+        quadratures = Quad.Quadratures(pceSettings.gridLevel, pceSettings.quadratureType)
         self.__GetCubature(quadratures, pceSettings.gridLevel, pceSettings.gridType)
         self.quadratures = quadratures
         self.scenarios, scenarioIndex = Unique(np.concatenate(self.nodes.transpose()[:, 0]))

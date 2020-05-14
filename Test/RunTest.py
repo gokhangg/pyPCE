@@ -1,11 +1,8 @@
-from Basis.CreateBasis import *
-from Cubatures.CalculateCoefficients import *
-from SettingsFileIO.Settings import *
+import SettingsFileIO as Settings
 from Test.ExampleFunctions import *
-from Cubatures.Cubatures import *
-from Evaluation.StandartDeviations import *
 from ExampleSettingsFile import*
-
+import numpy as np
+import pyPCE
 import unittest
 
 MONTECARLO_SAMPLESIZE = 200000
@@ -43,11 +40,14 @@ class TestPCE(unittest.TestCase):
 
     @staticmethod
     def GetPceStd(TestFunction, pceSettings, testedParamList):
-        pceSettings.basis, pceSettings.norm = CreateBasisPC(pceSettings)
-        cubature = Cubatures(pceSettings)
-        modelOutput = TestFunction(cubature.scenariosScaled)
-        pceSettings.coeffs = CalculateCoefficients(modelOutput, pceSettings, cubature)
-        return GetCrossStandardDeviation(pceSettings, testedParamList)
+        pyPce = pyPCE.pyPCE(pceSettings)
+
+        scenarios = pyPce.GetModelInputSamplingScenarios()
+        modelOutput = TestFunction(scenarios)
+
+        pyPce.SetModelOutput(modelOutput)
+        pyPce.CalculatePceCoefficients()
+        return pyPce.GetModelOutputStd(testedParamList)
 
     @staticmethod
     def GetMonteCarloStd(TestFunction, pceSettings):
@@ -60,7 +60,7 @@ class TestPCE(unittest.TestCase):
                  ):
         TestFunction = GetTestFunction(functionIndex, multiVar)
         settingsFile = GetExampleSettingsFile(settingsIndex)
-        pceSettings = LoadSettings(settingsFile)
+        pceSettings = Settings.LoadSettings(settingsFile)
         pceStd = cls.GetPceStd(TestFunction, pceSettings, testedParamList)
         MonteCarloStd = cls.GetMonteCarloStd(TestFunction, pceSettings)
         return MonteCarloStd, pceStd

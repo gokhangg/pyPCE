@@ -1,7 +1,5 @@
 from Utilities.Utilities import *
-from Polynomials.Hermite import *
-from Polynomials.Legendre import *
-from Polynomials.Laguerre import *
+import Polynomials as Pol
 
 def GetPolynomialResults(input, uPolOrders, polType):
     """
@@ -14,11 +12,11 @@ def GetPolynomialResults(input, uPolOrders, polType):
     :return:
     """
     if polType == "hermite":
-        return Hermite(input, uPolOrders)
+        return Pol.Hermite(input, uPolOrders)
     elif polType == "legendre":
-        return Legendre(input, uPolOrders)
+        return Pol.Legendre(input, uPolOrders)
     elif polType == "laguerre":
-        return Laguerre(input, uPolOrders)
+        return Pol.Laguerre(input, uPolOrders)
     elif polType == "jacobi":
         pass
     else:
