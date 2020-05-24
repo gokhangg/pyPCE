@@ -128,7 +128,7 @@ def NodeSizeToSplitSize(nodeSize):
     :return: List with concatanated elements.
     """
     temp = 0
-    nodeSize = list.copy(nodeSize)
+    nodeSize = list(nodeSize)
     for ind in range(len(nodeSize)):
         temp += nodeSize[ind]
         nodeSize[ind] = temp

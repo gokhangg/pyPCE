@@ -1,4 +1,4 @@
-from Utilities.Utilities import *
+from pyPCE.__Utilities import *
 
 
 class Quadratures(object):
@@ -62,7 +62,7 @@ class Quadratures(object):
     def __GetQuadratures(self):
         """
         Createst the entire quadratures.
-        :return: Quadratures.
+        :return: __Quadratures.
         """
         for ind, it in enumerate(self.quadratureTypes):
             quadFunct = self.__QuadratureFunction(it)

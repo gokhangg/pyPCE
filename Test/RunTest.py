@@ -1,8 +1,14 @@
-import SettingsFileIO as Settings
+
+import sys, os
+__selfPath = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.dirname(__selfPath))
+
+import pyPCE.SettingsFileIO as Settings
+from pyPCE.ExampleSettingsFile import*
+from pyPCE.pyPCE import pyPCE as PCE
+
 from Test.ExampleFunctions import *
-from ExampleSettingsFile import*
 import numpy as np
-import pyPCE
 import unittest
 
 MONTECARLO_SAMPLESIZE = 200000
@@ -40,7 +46,7 @@ class TestPCE(unittest.TestCase):
 
     @staticmethod
     def GetPceStd(TestFunction, pceSettings, testedParamList):
-        pyPce = pyPCE.pyPCE(pceSettings)
+        pyPce = PCE(pceSettings)
 
         scenarios = pyPce.GetModelInputSamplingScenarios()
         modelOutput = TestFunction(scenarios)

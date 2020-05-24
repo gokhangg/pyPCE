@@ -1,5 +1,5 @@
-from Utilities.Utilities import *
-import Polynomials as Pol
+from pyPCE.__Utilities import *
+import pyPCE.__Polynomials as Pol
 
 def GetPolynomialResults(input, uPolOrders, polType):
     """
@@ -62,4 +62,6 @@ def CalculateCoefficients(modelOutput, pceSettings, cubature):
     coefficients = np.true_divide(modelOutput.dot(np.transpose(polValues * cubature.totalWeights)), pceSettings.norm)
     if pceSettings.removeSmallElements:
         coefficients[np.abs(coefficients) < pceSettings.smallElementThreshold] = 0.
+    if len(coefficients.shape) == 1:
+        coefficients = coefficients.reshape([1, coefficients.shape[0]])
     return coefficients
