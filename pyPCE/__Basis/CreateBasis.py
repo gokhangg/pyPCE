@@ -58,7 +58,7 @@ def NormKernel(polType, index):
 
 def CreateNorm(basis, polTypes):
     """
-    :param basis: Basis whose shape is used in the creation of the norm.
+    :param basis: __Basis whose shape is used in the creation of the norm.
     :param polTypes: List which has polynomial type indirectly denoting input variable number.
     :return: Norm.
     """

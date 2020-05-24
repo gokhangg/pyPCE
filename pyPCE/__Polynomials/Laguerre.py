@@ -5,7 +5,7 @@ def Laguerre(input, polOrders):
     Evaluates Laguerre polynomial.
     :param input: NxM matrix where N and M are input and scenarios sizes.
     :param polOrders:  Unique polynomial order vector.
-    :return: Evaluation of the polynomial for all orders in the polOrders vector.
+    :return: __Evaluation of the polynomial for all orders in the polOrders vector.
     """
     if not polOrders in np.unique(polOrders):
         assert("Only unique polynomial order vector is supported.")

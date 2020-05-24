@@ -1,4 +1,4 @@
-import Cubatures.CalculateCoefficients as CalCoeff
+import pyPCE.__Cubatures.CalculateCoefficients as CalCoeff
 import numpy as np
 
 def EvaluatePce(pceSettings, scenarios_):

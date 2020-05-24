@@ -13,7 +13,7 @@ def GetSelectedIndices(basis, scenariosList):
     return ((basis > 0) == checklist).prod(1) > 0
 
 
-def GetCrossStandardDeviation(pceSettings, scenarioList):
+def GetCrossStandardDeviation(pceSettings, scenarioList = []):
     """
     Returns standard deviation vector given the scenarios list.
     :param pceSettings: Constructed PCE settings.
@@ -21,7 +21,7 @@ def GetCrossStandardDeviation(pceSettings, scenarioList):
     :return: Standard deviation vector.
     """
     if len(scenarioList) == 0:
-        return np.sqrt((pceSettings.norm[1:] * (pceSettings.coeffs[1:] ** 2)).sum())
+        return np.sqrt((pceSettings.coeffs[:, 1:] ** 2).dot(pceSettings.norm[1:]))
 
     scenarioList = np.array(scenarioList)
     scenarioListLen = scenarioList.shape[0]
@@ -30,4 +30,4 @@ def GetCrossStandardDeviation(pceSettings, scenarioList):
         assert("Requested scenarios and basis shape mismatch.")
 
     selectionVector = GetSelectedIndices(basis, scenarioList)
-    return np.sqrt((pceSettings.norm[selectionVector] * (pceSettings.coeffs[selectionVector] ** 2)).sum())
+    return np.sqrt((pceSettings.coeffs[:, selectionVector] ** 2).dot(pceSettings.norm[selectionVector]))
