@@ -1,5 +1,8 @@
-from pyPCE.__Utilities import *
-import pyPCE.__Polynomials as Pol
+from Utilities.Utilities import *
+from Polynomials.Hermite import Hermite
+from Polynomials.Legendre import Legendre
+from Polynomials.Laguerre import Laguerre
+import numpy as np
 
 def GetPolynomialResults(input, uPolOrders, polType):
     """
@@ -12,11 +15,11 @@ def GetPolynomialResults(input, uPolOrders, polType):
     :return:
     """
     if polType == "hermite":
-        return Pol.Hermite(input, uPolOrders)
+        return Hermite(input, uPolOrders)
     elif polType == "legendre":
-        return Pol.Legendre(input, uPolOrders)
+        return Legendre(input, uPolOrders)
     elif polType == "laguerre":
-        return Pol.Laguerre(input, uPolOrders)
+        return Laguerre(input, uPolOrders)
     elif polType == "jacobi":
         pass
     else:

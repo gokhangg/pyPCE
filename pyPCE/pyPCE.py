@@ -1,14 +1,15 @@
-import __Basis as Basis
-import __Cubatures.Cubatures as Cubatures
-from __Cubatures.CalculateCoefficients import CalculateCoefficients
-import __Evaluation as Evaluation
+from Basis.CreateBasis import CreateBasisPC
+from Cubatures.Cubatures import Cubatures
+from Cubatures.CalculateCoefficients import CalculateCoefficients
+import Evaluation.EvaluatePCE as Evaluation
+import Evaluation.StandartDeviations as StandartDeviation
 
 
 class pyPCE(object):
 
     def __init__(self, pceSettings):
         self.__pceSettings = pceSettings
-        self.__pceSettings.basis, self.__pceSettings.norm = Basis.CreateBasisPC(self.__pceSettings)
+        self.__pceSettings.basis, self.__pceSettings.norm = CreateBasisPC(self.__pceSettings)
         self.__cubature = Cubatures(self.__pceSettings)
 
     def GetModelInputSamplingScenarios(self):
@@ -21,7 +22,7 @@ class pyPCE(object):
         self.__pceSettings.coeffs = CalculateCoefficients(self.__modelOutput, self.__pceSettings, self.__cubature)
 
     def GetModelOutputStd(self, scenarioList):
-        return Evaluation.GetCrossStandardDeviation(self.__pceSettings, scenarioList)
+        return StandartDeviation.GetCrossStandardDeviation(self.__pceSettings, scenarioList)
 
     def EvaluatePceModel(self, scenario):
         return Evaluation.EvaluatePce(self.__pceSettings, scenario)

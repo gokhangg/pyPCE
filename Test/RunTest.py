@@ -3,7 +3,7 @@ import sys, os
 __selfPath = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(__selfPath))
 
-import pyPCE.SettingsFileIO as Settings
+from pyPCE.SettingsFileIO import Settings as Settings
 from pyPCE.ExampleSettingsFile import*
 from pyPCE.pyPCE import pyPCE as PCE
 
