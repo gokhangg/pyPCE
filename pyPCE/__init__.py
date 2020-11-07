@@ -1,3 +1,4 @@
-from SettingsFileIO.Settings import LoadSettings
-from ExampleSettingsFile import *
-from pyPCE import pyPCE
+
+import sys, os
+sys.path += [os.path.dirname(__file__)]
+
