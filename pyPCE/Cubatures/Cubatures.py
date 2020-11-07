@@ -1,5 +1,5 @@
-from pyPCE.Utilities.Utilities import *
-import pyPCE.Quadratures as Quad
+from Utilities.Utilities import *
+import Quadratures.Quadratures as Quad
 import numpy as np
 
 class Cubatures(object):

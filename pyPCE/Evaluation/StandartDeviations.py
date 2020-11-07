@@ -8,7 +8,7 @@ def GetSelectedIndices(basis, scenariosList):
     :return: Index vector.
     """
     scenariosList.sort()
-    checklist = np.zeros(basis.shape[1], dtype=np.bool)
+    checklist = np.zeros(basis.shape[1], dtype = np.bool)
     checklist[scenariosList] = True
     return ((basis > 0) == checklist).prod(1) > 0
 

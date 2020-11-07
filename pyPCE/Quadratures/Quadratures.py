@@ -1,4 +1,4 @@
-from pyPCE.__Utilities import *
+from Utilities.Utilities import *
 
 
 class Quadratures(object):
