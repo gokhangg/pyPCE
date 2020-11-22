@@ -62,7 +62,7 @@ def CalculateCoefficients(modelOutput, pceSettings, cubature):
     :return: Estimates PCE parameters.
     """
     polValues = CalculatePolynomials(pceSettings.polTypes, pceSettings.basis,  np.transpose(cubature.scenarios))
-    coefficients = np.true_divide(modelOutput.dot(np.transpose(polValues * cubature.totalWeights)), pceSettings.norm)
+    coefficients = np.true_divide(modelOutput.dot(np.transpose(polValues * cubature.totalWeights)), pceSettings.norm, dtype = modelOutput.dtype)
     if pceSettings.removeSmallElements:
         coefficients[np.abs(coefficients) < pceSettings.smallElementThreshold] = 0.
     if len(coefficients.shape) == 1:

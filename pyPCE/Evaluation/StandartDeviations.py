@@ -21,7 +21,7 @@ def GetCrossStandardDeviation(pceSettings, scenarioList = []):
     :return: Standard deviation vector.
     """
     if len(scenarioList) == 0:
-        return np.sqrt((pceSettings.coeffs[:, 1:] ** 2).dot(pceSettings.norm[1:]))
+        return np.array(np.sqrt((pceSettings.coeffs[:, 1:] ** 2).dot(pceSettings.norm[1:])), dtype="float32")
 
     scenarioList = np.array(scenarioList)
     scenarioListLen = scenarioList.shape[0]
